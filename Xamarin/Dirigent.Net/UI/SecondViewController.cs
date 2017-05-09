@@ -2,7 +2,7 @@
 
 using UIKit;
 
-namespace Dirigent.Net {
+namespace Dirigent.Net.UI {
 	public partial class SecondViewController : UIViewController {
 		protected SecondViewController(IntPtr handle) : base(handle) {
 			// Note: this .ctor should not contain any initialization logic.

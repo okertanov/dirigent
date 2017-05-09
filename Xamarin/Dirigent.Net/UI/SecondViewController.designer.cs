@@ -5,7 +5,7 @@
 //
 using Foundation;
 
-namespace Dirigent.Net {
+namespace Dirigent.Net.UI {
 	[Register("SecondViewController")]
 	partial class SecondViewController {
 		void ReleaseDesignerOutlets() {

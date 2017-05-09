@@ -1,0 +1,3 @@
+[submodule "Xamarin/submodules/TinyIoC"]
+	path = Xamarin/submodules/TinyIoC
+	url = git@github.com:grumpydev/TinyIoC.git
