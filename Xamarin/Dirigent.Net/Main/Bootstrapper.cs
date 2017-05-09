@@ -1,7 +1,7 @@
 ﻿using System;
 using Dirigent.Net.Logging;
 using Dirigent.Net.Messaging;
-using Dirigent.Net.Sys.Core;
+using Google.Maps;
 using TinyIoC;
 using TinyMessenger;
 
@@ -20,6 +20,7 @@ namespace Dirigent.Net.Main {
 
 		public void Launched() {
 			Logger.Debug("Launched");
+			MapServices.ProvideAPIKey("AIzaSyBFI1eo79_NB3nflo4ac48fUlkGos__WN4");
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.Launched));
 		}
 

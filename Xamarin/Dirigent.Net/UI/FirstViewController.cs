@@ -1,21 +1,38 @@
 ﻿using System;
-
+using CoreGraphics;
+using Google.Maps;
 using UIKit;
 
 namespace Dirigent.Net.UI {
 	public partial class FirstViewController : UIViewController {
+		private MapView mapView;
+
 		protected FirstViewController(IntPtr handle) : base(handle) {
-			// Note: this .ctor should not contain any initialization logic.
 		}
 
 		public override void ViewDidLoad() {
 			base.ViewDidLoad();
-			// Perform any additional setup after loading the view, typically from a nib.
+
+			if (mapView == null) {
+				var cameraPosition = CameraPosition.FromCamera(latitude: 56.948889, longitude: 24.106389, zoom: 5);
+				mapView = MapView.FromCamera(View.Bounds, cameraPosition);
+				mapView.MyLocationEnabled = true;
+
+				View.AutosizesSubviews = true;
+				View.AutoresizingMask = UIViewAutoresizing.All;
+				View.AddSubview(mapView);
+				View.SendSubviewToBack(mapView);
+			}
 		}
 
-		public override void DidReceiveMemoryWarning() {
-			base.DidReceiveMemoryWarning();
-			// Release any cached data, images, etc that aren't in use.
+		public override void ViewWillAppear(bool animated) {
+			base.ViewWillAppear(animated);
+			mapView.StartRendering();
+		}
+
+		public override void ViewWillDisappear(bool animated) {
+			mapView.StopRendering();
+			base.ViewWillDisappear(animated);
 		}
 	}
 }

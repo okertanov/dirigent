@@ -24,7 +24,12 @@
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>arm64</string>
+		<string>gps</string>
+		<string>location-services</string>
+		<string>gyroscope</string>
+		<string>magnetometer</string>
+		<string>still-camera</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -34,5 +39,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please allow the Location access.</string>
 </dict>
 </plist>
