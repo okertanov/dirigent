@@ -1,5 +1,4 @@
 ﻿using System;
-using CoreGraphics;
 using Google.Maps;
 using UIKit;
 

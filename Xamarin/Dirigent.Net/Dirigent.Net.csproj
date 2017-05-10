@@ -71,7 +71,7 @@
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;LOG_TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Oleh Kertanov (U8GVJ4KJ72)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
@@ -84,6 +84,7 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
+    <CodesignProvision>a2aedb5f-850e-48fd-8e02-00d9429b1988</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
