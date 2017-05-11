@@ -41,5 +41,10 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow the Location access.</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	    <string>googlechromes</string>
+	    <string>comgooglemaps</string>
+	</array>
 </dict>
 </plist>

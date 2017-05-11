@@ -119,6 +119,7 @@
     <Folder Include="Services\" />
     <Folder Include="Services\Impl\" />
     <Folder Include="Messaging\" />
+    <Folder Include="UI\Components\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -158,6 +159,12 @@
     <Compile Include="Messaging\AppLifecycleMessage.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\Impl\LocationService.cs" />
+    <Compile Include="UI\Components\ActionSheet.cs" />
+    <Compile Include="Sys\Helpers\ThreadUtils.cs" />
+    <Compile Include="Services\IBookmarksManager.cs" />
+    <Compile Include="Services\IBookmarksRepository.cs" />
+    <Compile Include="UI\Components\HeadUpDisplay.cs" />
+    <Compile Include="UI\Components\GalleryImagePicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-128x128.png" />
