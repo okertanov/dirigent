@@ -35,7 +35,7 @@ namespace Dirigent.Net.UI.Components {
 					AutoresizingMask = UIViewAutoresizing.All,
 					AutosizesSubviews = true
 				};
-				hudView.Layer.CornerRadius = 32f;
+				hudView.Layer.CornerRadius = 24f;
 				var label = new UILabel(hudView.Bounds) {
 					TextAlignment = UITextAlignment.Center,
 					TextColor = UIColor.White,

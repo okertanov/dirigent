@@ -43,8 +43,14 @@
 	<string>Please allow the Location access.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-	    <string>googlechromes</string>
-	    <string>comgooglemaps</string>
+		<string>googlechromes</string>
+		<string>comgooglemaps</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
 </dict>
 </plist>

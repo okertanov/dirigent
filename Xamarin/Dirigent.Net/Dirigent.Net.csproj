@@ -165,6 +165,7 @@
     <Compile Include="Services\IBookmarksRepository.cs" />
     <Compile Include="UI\Components\HeadUpDisplay.cs" />
     <Compile Include="UI\Components\GalleryImagePicker.cs" />
+    <Compile Include="Sys\Helpers\UIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-128x128.png" />

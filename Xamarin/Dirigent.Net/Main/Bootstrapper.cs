@@ -1,6 +1,8 @@
 ﻿using System;
 using Dirigent.Net.Logging;
 using Dirigent.Net.Messaging;
+using Dirigent.Net.Services;
+using Dirigent.Net.Services.Impl;
 using Google.Maps;
 using TinyIoC;
 using TinyMessenger;
@@ -14,8 +16,11 @@ namespace Dirigent.Net.Main {
 
 		public Bootstrapper(TinyIoCContainer container) {
 			this.container = container;
+
 			this.container.Register<ITinyMessengerHub, TinyMessengerHub>().AsSingleton();
 			this.messenger = this.container.Resolve<ITinyMessengerHub>();
+
+			this.container.Register<ILocationService, LocationService>().AsSingleton();
 		}
 
 		public void Launched() {

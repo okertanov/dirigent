@@ -73,6 +73,7 @@ namespace Dirigent.Net.UI.Components {
 	}
 
 	public class ActionSheetItem {
+		public static ActionSheetItem Empty = new ActionSheetItem(String.Empty, delegate { return null; });
 		public string Title { get; private set; }
 		public Func<ActionSheetItem, Task> Handler { get; private set; }
 
