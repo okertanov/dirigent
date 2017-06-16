@@ -12,6 +12,11 @@ Improvements
  - Image selector
  - Regions and Quads
 
+
+ - No Internet HUD
+ - Multiple Photos selection
+ - Scan Library & Notifi user by Local notification if near the foto
+
 Ideas
 -----
  - Navigate to an image's exif geodata

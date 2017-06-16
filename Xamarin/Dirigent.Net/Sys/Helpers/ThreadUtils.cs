@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 
@@ -19,6 +20,15 @@ namespace Dirigent.Net.Sys.Helpers {
 			}
 			else {
 				UIApplication.SharedApplication.BeginInvokeOnMainThread(action);
+			}
+		}
+
+		public static void SafeBeginInvokeOnMainThread(Func<Task> awaitable) {
+			if (NSThread.IsMain) {
+				awaitable.Invoke();
+			}
+			else {
+				UIApplication.SharedApplication.BeginInvokeOnMainThread(() => awaitable.Invoke());
 			}
 		}
 	}

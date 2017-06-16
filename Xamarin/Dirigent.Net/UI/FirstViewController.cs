@@ -125,12 +125,13 @@ namespace Dirigent.Net.UI {
 			await ZoomToLocation(location.Coordinate.Latitude, location.Coordinate.Longitude, DefaultZoom);
 		}
 
-		private async Task OnNavigateByPhoto(ActionSheetItem arg) {
+		private Task OnNavigateByPhoto(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
 			ThreadUtils.SafeBeginInvokeOnMainThread(OnNavigateByPhotoImpl);
+			return Task.FromResult(true);
 		}
 
-		private async void OnNavigateByPhotoImpl() {
+		private async Task OnNavigateByPhotoImpl() {
 			var picker = new GalleryImagePicker();
 			var imagesPath = await picker.Pick(this);
 			var imagePath = imagesPath.FirstOrDefault();
@@ -138,20 +139,27 @@ namespace Dirigent.Net.UI {
 			var imagesUrls = imagesPath.Select(p => new NSUrl(p)).ToArray();
 			var assetResult = PHAsset.FetchAssets(imagesUrls, new PHFetchOptions());
 			var asset = assetResult.First() as PHAsset;
-			PHImageManager.DefaultManager.RequestImageForAsset(asset, CGSize.Empty, PHImageContentMode.Default, new PHImageRequestOptions(), (result, info) => {
+			var assetLocation = asset.Location;
+			Logger.Debug("PH Image Manager: Asset: {0}, Location: {1}", asset, assetLocation);
+			PHImageManager.DefaultManager.RequestImageForAsset(asset, CGSize.Empty, PHImageContentMode.Default, new PHImageRequestOptions(), async (result, info) => {
 				Logger.Debug("PH Image Manager: Image: {0}, info: {1}", result, info);
+				var geocodingInfo = await GetReverseGeocodingInfo(assetLocation.Coordinate);
+				await DropPin(assetLocation.Coordinate, geocodingInfo.Item1, geocodingInfo.Item1, result);
+				await ZoomToLocation(assetLocation.Coordinate.Latitude, assetLocation.Coordinate.Longitude, mapView.Layer.CameraZoomLevel);
 			});
 		}
 
-		private async Task OnBookmarkPlace(ActionSheetItem arg) {
+		private Task OnBookmarkPlace(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
+			return Task.FromResult(false);
 		}
 
-		private async Task OnRouteTracking(ActionSheetItem arg) {
+		private Task OnRouteTracking(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
+			return Task.FromResult(false);
 		}
 
-		private async Task OnChangeMapType(ActionSheetItem arg) {
+		private Task OnChangeMapType(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
 			var oldMapType = mapView.MapType;
 			var newMapType = (MapViewType)((int)oldMapType + 1);
@@ -169,11 +177,13 @@ namespace Dirigent.Net.UI {
 			});
 
 			Logger.Debug("Map type changed from {0} to {1}", oldMapType, newMapType);
+			return Task.FromResult(true);
 		}
 
-		private async Task OnOpenGoogleMaps(ActionSheetItem arg) {
+		private Task OnOpenGoogleMaps(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
-			ThreadUtils.SafeBeginInvokeOnMainThread(OnOpenGoogleMapsImpl);
+			ThreadUtils.SafeBeginInvokeOnMainThread(() => OnOpenGoogleMapsImpl());
+			return Task.FromResult(true);
 		}
 
 		private void OnOpenGoogleMapsImpl() {
@@ -192,7 +202,7 @@ namespace Dirigent.Net.UI {
 
 		#region Event Handlers
 
-		private async void OnCameraPositionChanged(object sender, GMSCameraEventArgs args) {
+		private void OnCameraPositionChanged(object sender, GMSCameraEventArgs args) {
 			//var info = await GetReverseGeocodingInfo(args.Position.Target);
 			//Logger.Debug("Camera position changed: {0},{1} (z:{2},b:{3},a:{4})\n\t'{5}'", args.Position.Target.Latitude, args.Position.Target.Longitude, args.Position.Zoom, args.Position.Bearing, args.Position.ViewingAngle, info.Item2);
 		}
@@ -243,7 +253,7 @@ namespace Dirigent.Net.UI {
 			}
 		}
 
-		private async void OnAppLifecycleMessage(AppLifecycleMessage message) {
+		private void OnAppLifecycleMessage(AppLifecycleMessage message) {
 			Logger.Debug("App Lifecycle Message: {0}", message.Content);
 			switch (message.Content) {
 				case AppLifecycleState.EnterForeground:
@@ -291,6 +301,18 @@ namespace Dirigent.Net.UI {
 			// cameraMapView.Delegate = new SearchMapViewDelegate();
 
 			return Task.FromResult(cameraMapView);
+		}
+
+		private Task DropPin(CLLocationCoordinate2D coordinate, string title, string description, UIImage icon) {
+			new Marker {
+				Position = coordinate,
+				Title = title,
+				Snippet = description,
+				Map = mapView,
+				AppearAnimation = MarkerAnimation.Pop,
+				Icon = icon
+			};
+			return Task.CompletedTask;
 		}
 
 		private Task ZoomToLocation(double latitude, double longitude, float zoom) {
