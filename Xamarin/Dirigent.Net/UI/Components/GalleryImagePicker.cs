@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dirigent.Net.Logging;
-using Dirigent.Net.Sys.Core;
 using Foundation;
 using UIKit;
 
@@ -20,7 +19,7 @@ namespace Dirigent.Net.UI.Components {
 			};
 		}
 
-		public Task<IEnumerable<string>> Pick(object sender) {
+		public Task<IEnumerable<string>> PickAsync(object sender) {
 			tcs = new TaskCompletionSource<IEnumerable<string>>();
 
 			var navigationController = UIApplication.SharedApplication.KeyWindow.RootViewController as UIViewController;

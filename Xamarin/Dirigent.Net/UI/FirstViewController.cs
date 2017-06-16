@@ -11,7 +11,6 @@ using Dirigent.Net.Sys.Helpers;
 using Dirigent.Net.UI.Components;
 using Foundation;
 using Google.Maps;
-using Photos;
 using TinyIoC;
 using TinyMessenger;
 using UIKit;
@@ -20,11 +19,13 @@ namespace Dirigent.Net.UI {
 	public partial class FirstViewController : UIViewController {
 		private const float DefaultZoom = 16f;
 
+		private readonly ILocationService locationService;
+		private readonly IPhotoLibraryService photoLibraryService;
+
 		private UIGestureRecognizer doubleTapRecognizer;
 		private ActionSheet actionSheet;
 		private MapView mapView;
 		private Geocoder geocoder;
-		private ILocationService locationService;
 		private IDisposable appLifecycleSubscription;
 
 		private static readonly Logger Logger = LogManager.GetLogger<FirstViewController>();
@@ -34,6 +35,8 @@ namespace Dirigent.Net.UI {
 		public bool ChromeShown { get; private set; }
 
 		protected FirstViewController(IntPtr handle) : base(handle) {
+			locationService = TinyIoCContainer.Current.Resolve<ILocationService>();
+			photoLibraryService = TinyIoCContainer.Current.Resolve<IPhotoLibraryService>();
 		}
 
 		public override void ViewDidLoad() {
@@ -42,7 +45,6 @@ namespace Dirigent.Net.UI {
 			var messengerHub = TinyIoCContainer.Current.Resolve<ITinyMessengerHub>();
 			appLifecycleSubscription = messengerHub.Subscribe<AppLifecycleMessage>(OnAppLifecycleMessage);
 
-			locationService = TinyIoCContainer.Current.Resolve<ILocationService>();
 			locationService.LocationChanged += OnLocationServiceLocationChanged;
 			locationService.StartMonitorLocation();
 
@@ -125,28 +127,45 @@ namespace Dirigent.Net.UI {
 			await ZoomToLocation(location.Coordinate.Latitude, location.Coordinate.Longitude, DefaultZoom);
 		}
 
-		private Task OnNavigateByPhoto(ActionSheetItem arg) {
+		private async Task OnNavigateByPhoto(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
-			ThreadUtils.SafeBeginInvokeOnMainThread(OnNavigateByPhotoImpl);
-			return Task.FromResult(true);
+			await ThreadUtils.SafeBeginInvokeOnMainThreadAsync(OnNavigateByPhotoImpl);
 		}
 
 		private async Task OnNavigateByPhotoImpl() {
-			var picker = new GalleryImagePicker();
-			var imagesPath = await picker.Pick(this);
-			var imagePath = imagesPath.FirstOrDefault();
-			Logger.Debug("Image selected: {0}", imagePath);
-			var imagesUrls = imagesPath.Select(p => new NSUrl(p)).ToArray();
-			var assetResult = PHAsset.FetchAssets(imagesUrls, new PHFetchOptions());
-			var asset = assetResult.First() as PHAsset;
-			var assetLocation = asset.Location;
-			Logger.Debug("PH Image Manager: Asset: {0}, Location: {1}", asset, assetLocation);
-			PHImageManager.DefaultManager.RequestImageForAsset(asset, CGSize.Empty, PHImageContentMode.Default, new PHImageRequestOptions(), async (result, info) => {
-				Logger.Debug("PH Image Manager: Image: {0}, info: {1}", result, info);
+			var imagePaths = await photoLibraryService.PickAsync(this);
+
+			var selectedAssets = await photoLibraryService.RequestAssetsAsync(imagePaths);
+			var selectedAsset = selectedAssets.First();
+
+			var allCollections = await photoLibraryService.RequestCollectionsAsync();
+			var collectionsForAsset = await photoLibraryService.RequestCollectionsContainingAsync(selectedAsset);
+
+			var assetLocation = selectedAsset.Location ??
+			                    collectionsForAsset
+			                    	.Where(c => c.ApproximateLocation != null)
+			                        .Select(c => c.ApproximateLocation)
+			                        .FirstOrDefault() ?? null;
+			Logger.Debug("Asset: {0}, Location: {1}", selectedAsset, assetLocation);
+
+			var imageRequest = await photoLibraryService.RequestImageAsync(selectedAsset, CGSize.Empty);
+			var imageDataRequest = await photoLibraryService.RequestImageDataAsync(selectedAsset);
+			Logger.Debug("Image: {0}, info: {1} ({2}-{3}-{4}-{5})", imageRequest.Image, imageRequest.Info, imageDataRequest.Data.Length, imageDataRequest.DataUti, imageDataRequest.Orientation, imageDataRequest.Info);
+
+			if (assetLocation != null) {
 				var geocodingInfo = await GetReverseGeocodingInfo(assetLocation.Coordinate);
-				await DropPin(assetLocation.Coordinate, geocodingInfo.Item1, geocodingInfo.Item1, result);
+				await DropPin(assetLocation.Coordinate, geocodingInfo.Item1, geocodingInfo.Item1, imageRequest.Image);
 				await ZoomToLocation(assetLocation.Coordinate.Latitude, assetLocation.Coordinate.Longitude, mapView.Layer.CameraZoomLevel);
-			});
+			}
+			else {
+				var fileName = imageDataRequest.Info["PHImageFileURLKey"]?.ToString() ?? selectedAsset.LocalIdentifier;
+				var title = String.Format("No Location for image {0}", fileName);
+				var description = "Please select another one.";
+				using (var alert = new AlertView(AlertViewType.Close, title, description)) {
+					var cts = new CancellationTokenSource();
+					var res = await alert.ShowAsync(cts);
+				}
+			}
 		}
 
 		private Task OnBookmarkPlace(ActionSheetItem arg) {
@@ -303,8 +322,8 @@ namespace Dirigent.Net.UI {
 			return Task.FromResult(cameraMapView);
 		}
 
-		private Task DropPin(CLLocationCoordinate2D coordinate, string title, string description, UIImage icon) {
-			new Marker {
+		private Task<Marker> DropPin(CLLocationCoordinate2D coordinate, string title, string description, UIImage icon) {
+			var marker = new Marker {
 				Position = coordinate,
 				Title = title,
 				Snippet = description,
@@ -312,7 +331,7 @@ namespace Dirigent.Net.UI {
 				AppearAnimation = MarkerAnimation.Pop,
 				Icon = icon
 			};
-			return Task.CompletedTask;
+			return Task.FromResult(marker);
 		}
 
 		private Task ZoomToLocation(double latitude, double longitude, float zoom) {
@@ -381,7 +400,6 @@ namespace Dirigent.Net.UI {
 				if (locationService != null) {
 					locationService.LocationChanged -= OnLocationServiceLocationChanged;
 					locationService.StopMonitorLocation();
-					locationService = null;
 				}
 
 				if (doubleTapRecognizer != null && doubleTapRecognizer.Handle != IntPtr.Zero) {

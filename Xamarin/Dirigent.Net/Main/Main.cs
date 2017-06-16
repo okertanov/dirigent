@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using Foundation;
+using Dirigent.Net.UI.Components;
 using UIKit;
 
 namespace Dirigent.Net.Main {
@@ -44,7 +44,7 @@ namespace Dirigent.Net.Main {
 		// HandleCriticalException() - Critical exception reporting.
 		//
 		private static void HandleCriticalException(Exception e) {
-			const string errorTitle = "Critical Error: Unhandled exception occured.\nApplicatin will be terminated.";
+			const string errorTitle = "Unhandled exception occured.\nApplicatin will be terminated.";
 			const string errorFormat = "\n\n{0}\nDetails:\n{1}\n\n";
 
 			// Format string message for output.
@@ -52,24 +52,12 @@ namespace Dirigent.Net.Main {
 
 			Console.WriteLine(exceptionString);
 
-			var alert = new UIAlertView(errorTitle, e.Message, null, "  :(  ") {
-				WeakDelegate = new AlertViewDelegate()
-			};
-			alert.Show();
+			var alert = new AlertView(AlertViewType.Close, errorTitle, e?.Message ?? "Unknown error.");
+			var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+			alert.ShowModal(cts);
 
-			while (true) {
-				NSRunLoop.Main.RunUntil(NSRunLoopMode.UITracking, NSDate.DistantFuture);
-			}
-		}
-
-		internal sealed class AlertViewDelegate : UIAlertViewDelegate {
-			public override void Clicked(UIAlertView alertview, nint buttonIndex) {
-				Thread.CurrentThread.Abort();
-			}
-
-			public override void Dismissed(UIAlertView alertView, nint buttonIndex) {
-				Thread.CurrentThread.Abort();
-			}
+			Console.WriteLine("Aborting...");
+			Thread.CurrentThread.Abort();
 		}
 	}
 }

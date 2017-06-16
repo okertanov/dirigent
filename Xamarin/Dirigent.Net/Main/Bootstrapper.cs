@@ -21,6 +21,7 @@ namespace Dirigent.Net.Main {
 			this.messenger = this.container.Resolve<ITinyMessengerHub>();
 
 			this.container.Register<ILocationService, LocationService>().AsSingleton();
+			this.container.Register<IPhotoLibraryService, PhotoLibraryService>().AsSingleton();
 		}
 
 		public void Launched() {

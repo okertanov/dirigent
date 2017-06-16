@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Foundation;
-using UIKit;
 
 namespace Dirigent.Net.Sys.Helpers {
 	public static class ThreadUtils {
@@ -10,7 +9,7 @@ namespace Dirigent.Net.Sys.Helpers {
 				action.Invoke();
 			}
 			else {
-				UIApplication.SharedApplication.InvokeOnMainThread(action);
+				NSThread.MainThread.InvokeOnMainThread(action);
 			}
 		}
 
@@ -19,16 +18,39 @@ namespace Dirigent.Net.Sys.Helpers {
 				action.Invoke();
 			}
 			else {
-				UIApplication.SharedApplication.BeginInvokeOnMainThread(action);
+				NSThread.MainThread.BeginInvokeOnMainThread(action);
 			}
 		}
 
-		public static void SafeBeginInvokeOnMainThread(Func<Task> awaitable) {
+		public static Task SafeBeginInvokeOnMainThreadAsync(Func<Task> action) {
 			if (NSThread.IsMain) {
-				awaitable.Invoke();
+				return action.Invoke();
 			}
 			else {
-				UIApplication.SharedApplication.BeginInvokeOnMainThread(() => awaitable.Invoke());
+				var tcs = new TaskCompletionSource<bool>();
+				NSThread.MainThread.BeginInvokeOnMainThread(() => {
+					try {
+						action().ContinueWith(t => {
+							try {
+								t.CheckException();
+								tcs.TrySetResult(true);
+							}
+							catch (ObjectDisposedException) {
+								tcs.TrySetResult(true);
+							}
+							catch (Exception ex) {
+								tcs.TrySetException(ex);
+							}
+						}, TaskContinuationOptions.ExecuteSynchronously);
+
+						tcs.TrySetResult(true);
+					}
+					catch (Exception e) {
+						tcs.TrySetException(e);
+					}
+				});
+
+				return tcs.Task;
 			}
 		}
 	}
