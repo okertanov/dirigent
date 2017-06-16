@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Foundation;
 using UIKit;
 
@@ -51,14 +52,24 @@ namespace Dirigent.Net.Main {
 
 			Console.WriteLine(exceptionString);
 
-			var alert = new UIAlertView(errorTitle, e.Message, null, "  :(  ");
+			var alert = new UIAlertView(errorTitle, e.Message, null, "  :(  ") {
+				WeakDelegate = new AlertViewDelegate()
+			};
 			alert.Show();
 
 			while (true) {
 				NSRunLoop.Main.RunUntil(NSRunLoopMode.UITracking, NSDate.DistantFuture);
 			}
+		}
 
-			throw e;
+		internal sealed class AlertViewDelegate : UIAlertViewDelegate {
+			public override void Clicked(UIAlertView alertview, nint buttonIndex) {
+				Thread.CurrentThread.Abort();
+			}
+
+			public override void Dismissed(UIAlertView alertView, nint buttonIndex) {
+				Thread.CurrentThread.Abort();
+			}
 		}
 	}
 }
