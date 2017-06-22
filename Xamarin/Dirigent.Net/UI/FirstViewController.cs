@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CoreGraphics;
 using CoreLocation;
+using Dirigent.Common.Services;
 using Dirigent.Net.Logging;
 using Dirigent.Net.Messaging;
 using Dirigent.Net.Services;
@@ -19,11 +20,12 @@ namespace Dirigent.Net.UI {
 	public partial class FirstViewController : UIViewController {
 		private const float DefaultZoom = 16f;
 
+        private readonly IAuthService authService;
 		private readonly ILocationService locationService;
 		private readonly IPhotoLibraryService photoLibraryService;
 
 		private UIGestureRecognizer doubleTapRecognizer;
-		private ActionSheet actionSheet;
+		private Lazy<ActionSheet> actionSheet;
 		private MapView mapView;
 		private Geocoder geocoder;
 		private IDisposable appLifecycleSubscription;
@@ -35,8 +37,11 @@ namespace Dirigent.Net.UI {
 		public bool ChromeShown { get; private set; }
 
 		protected FirstViewController(IntPtr handle) : base(handle) {
+            authService = TinyIoCContainer.Current.Resolve<IAuthService>();
 			locationService = TinyIoCContainer.Current.Resolve<ILocationService>();
 			photoLibraryService = TinyIoCContainer.Current.Resolve<IPhotoLibraryService>();
+
+			actionSheet = new Lazy<ActionSheet>(CreateActionSheet);
 		}
 
 		public override void ViewDidLoad() {
@@ -73,15 +78,6 @@ namespace Dirigent.Net.UI {
 				View.AddSubview(mapView);
 				View.SendSubviewToBack(mapView);
 
-				actionSheet = new ActionSheet(null, "Close", new [] {
-					new ActionSheetItem("Zoom to my Location", OnZoomMyLocation),
-					new ActionSheetItem("Navigate by Photo", OnNavigateByPhoto),
-					new ActionSheetItem("Bookmark this Place", OnBookmarkPlace),
-					new ActionSheetItem("Route Tracking", OnRouteTracking),
-					new ActionSheetItem("Change Map Type", OnChangeMapType),
-					new ActionSheetItem("Open Google Maps", OnOpenGoogleMaps)
-				});
-
 				AddImageButton.TouchUpInside += OnAddImageButtonTouchUpInside;
 
 				InitChrome();
@@ -111,7 +107,7 @@ namespace Dirigent.Net.UI {
 		#region Menu Handlers
 
 		private async void OnAddImageButtonTouchUpInside(object sender, EventArgs args) {
-			await actionSheet.Present(sender as UIView).ContinueWith(async t => {
+			await actionSheet.Value.Present(sender as UIView).ContinueWith(async t => {
 				if (!t.IsCanceled && !t.IsFaulted && t.IsCompleted) {
 					await t.Result.Handler(t.Result);
 				}
@@ -120,6 +116,10 @@ namespace Dirigent.Net.UI {
 				}
 			});
 		}
+
+        private async Task OnAuthenticateUser(ActionSheetItem arg) {
+			Logger.Debug("Menu item selected: '{0}'", arg.Title);
+        }
 
 		private async Task OnZoomMyLocation(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
@@ -317,8 +317,6 @@ namespace Dirigent.Net.UI {
 			cameraMapView.Settings.MyLocationButton = true;
 			cameraMapView.Settings.SetAllGesturesEnabled(true);
 
-			// cameraMapView.Delegate = new SearchMapViewDelegate();
-
 			return Task.FromResult(cameraMapView);
 		}
 
@@ -390,6 +388,25 @@ namespace Dirigent.Net.UI {
 			}
 		}
 
+		private ActionSheet CreateActionSheet() {
+            var user = authService.GetUser();
+
+            var loginActionSheetTitle = user.IsAuthenticated ? 
+                String.Format("Hello {0}", user.DisplayName) : 
+                String.Format("{0} user. Sign-in", user.IsDemo ? "Demo" : "Unknown" );
+
+            var sheet = new ActionSheet(null, "Close", new[] {
+                    new ActionSheetItem(loginActionSheetTitle, OnAuthenticateUser),
+					new ActionSheetItem("Zoom to my Location", OnZoomMyLocation),
+					new ActionSheetItem("Navigate by Photo", OnNavigateByPhoto),
+					new ActionSheetItem("Bookmark this Place", OnBookmarkPlace),
+					new ActionSheetItem("Route Tracking", OnRouteTracking),
+					new ActionSheetItem("Change Map Type", OnChangeMapType),
+					new ActionSheetItem("Open Google Maps", OnOpenGoogleMaps)
+				});
+			return sheet;
+		}
+
 		protected override void Dispose(bool disposing) {
 			if (disposing) {
 				if (appLifecycleSubscription != null) {
@@ -432,8 +449,8 @@ namespace Dirigent.Net.UI {
 					geocoder = null;
 				}
 
-				if (actionSheet != null) {
-					actionSheet.Dispose();
+				if (actionSheet != null && actionSheet.Value != null) {
+					actionSheet.Value.Dispose();
 					actionSheet = null;
 				}
 
@@ -446,8 +463,5 @@ namespace Dirigent.Net.UI {
 
 			base.Dispose(disposing);
 		}
-	}
-
-	internal class SearchMapViewDelegate : MapViewDelegate {
 	}
 }

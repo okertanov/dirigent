@@ -1,6 +1,6 @@
 Xamarin/packages
-/Xamarin/Dirigent.Net/bin/
-/Xamarin/Dirigent.Net/obj/
+bin/
+obj/
 /iOS/Build/
 /iOS/Dirigent.xcworkspace/xcuserdata/
 /iOS/Dirigent/Dirigent.xcodeproj/xcuserdata/
