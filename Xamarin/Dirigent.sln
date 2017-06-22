@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Common", "Dirigent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Auth", "Dirigent.Auth\Dirigent.Auth.csproj", "{8D367C72-23A2-4A52-B65A-479DC37C2D1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Auth.iOS", "Dirigent.Auth.iOS.iOS\Dirigent.Auth.iOS.csproj", "{50393067-DD96-487B-96E3-6EDB409765D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Auth.iOS", "Dirigent.Auth.iOS\Dirigent.Auth.iOS.csproj", "{50393067-DD96-487B-96E3-6EDB409765D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Remote", "Dirigent.Remote\Dirigent.Remote.csproj", "{8AACDB55-F454-4D69-B95E-50612489C037}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Remote.iOS", "Dirigent.Remote.iOS.iOS\Dirigent.Remote.iOS.csproj", "{FB0AEFFF-EBDC-49A4-B288-10E89FD3B419}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Remote.iOS", "Dirigent.Remote.iOS\Dirigent.Remote.iOS.csproj", "{FB0AEFFF-EBDC-49A4-B288-10E89FD3B419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
