@@ -5,7 +5,7 @@ using Dirigent.Common.Core.Module;
 using Dirigent.Common.Services;
 
 namespace Dirigent.Auth.iOS {
-	public class AuthIosModule : IModule {
+	public sealed class AuthIosModule : IModule {
 		private readonly IIoCContainer container;
 		private readonly IMessengerHub messenger;
 

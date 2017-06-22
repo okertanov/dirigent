@@ -12,7 +12,7 @@ using TinyIoC;
 using TinyMessenger;
 
 namespace Dirigent.Net.Main {
-	public class Bootstrapper {
+	internal sealed class Bootstrapper {
 		private readonly IIoCContainer container;
 		private readonly IMessengerHub messenger;
 

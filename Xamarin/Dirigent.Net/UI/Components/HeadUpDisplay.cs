@@ -6,7 +6,7 @@ using Dirigent.Net.Sys.Helpers;
 using UIKit;
 
 namespace Dirigent.Net.UI.Components {
-	public class HeadUpDisplay : IDisposable {
+	internal class HeadUpDisplay : IDisposable {
 		private UIView hudView;
 		private UIGestureRecognizer gestureRecognizer;
 

@@ -6,7 +6,7 @@ using Foundation;
 using UIKit;
 
 namespace Dirigent.Net.UI.Components {
-	public class GalleryImagePicker : IDisposable {
+	internal class GalleryImagePicker : IDisposable {
 		private UIImagePickerController imagePickerController;
 		private TaskCompletionSource<IEnumerable<string>> tcs;
 		private static readonly Logger Logger = LogManager.GetLogger<GalleryImagePicker>();

@@ -3,7 +3,7 @@
 using UIKit;
 
 namespace Dirigent.Net.UI {
-	public partial class SecondViewController : UIViewController {
+	internal partial class SecondViewController : UIViewController {
 		protected SecondViewController(IntPtr handle) : base(handle) {
 		}
 

@@ -17,7 +17,7 @@ using TinyMessenger;
 using UIKit;
 
 namespace Dirigent.Net.UI {
-	public partial class FirstViewController : UIViewController {
+	internal partial class FirstViewController : UIViewController {
 		private const float DefaultZoom = 16f;
 
         private readonly IAuthService authService;

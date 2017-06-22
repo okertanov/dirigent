@@ -2,7 +2,7 @@
 using UIKit;
 
 namespace Dirigent.Net.UI.Auth {
-	public partial class AuthMainVC : UIViewController {
+	internal partial class AuthMainVC : UIViewController {
 		public AuthMainVC() : base("AuthMainVC", null) {
 		}
 

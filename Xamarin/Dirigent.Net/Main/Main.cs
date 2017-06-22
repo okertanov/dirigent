@@ -4,7 +4,7 @@ using Dirigent.Net.UI.Components;
 using UIKit;
 
 namespace Dirigent.Net.Main {
-	public class Application {
+	internal sealed class Application {
 		static void Main(string[] args) {
 			try {
 				InitializeDomainExceptionsHandler();

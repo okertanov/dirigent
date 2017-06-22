@@ -6,7 +6,7 @@ using Dirigent.Net.Sys.Core;
 using UIKit;
 
 namespace Dirigent.Net.UI.Components {
-	public class ActionSheet : IDisposable {
+	internal class ActionSheet : IDisposable {
 		private readonly IEnumerable<ActionSheetItem> items;
 		private UIActionSheet actionSheet;
 		private TaskCompletionSource<ActionSheetItem> tcs;

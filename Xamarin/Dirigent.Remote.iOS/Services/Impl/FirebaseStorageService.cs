@@ -2,7 +2,7 @@
 using Dirigent.Remote.Services;
 
 namespace Dirigent.Remote.iOS.Services.Impl {
-	public class FirebaseStorageService : IStorageService {
+	internal sealed class FirebaseStorageService : IStorageService {
 		public FirebaseStorageService() {
 		}
 	}

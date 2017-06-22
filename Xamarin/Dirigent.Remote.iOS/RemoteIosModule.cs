@@ -5,7 +5,7 @@ using Dirigent.Remote.iOS.Services.Impl;
 using Dirigent.Remote.Services;
 
 namespace Dirigent.Remote.iOS {
-	public class RemoteIosModule : IModule {
+	public sealed class RemoteIosModule : IModule {
         private readonly IIoCContainer container;
         private readonly IMessengerHub messenger;
 

@@ -2,7 +2,7 @@
 using Dirigent.Auth.Services;
 
 namespace Dirigent.Auth.iOS.Services.Impl {
-    internal class FirebaseAuthService : AuthService {
+    internal sealed class FirebaseAuthService : AuthService {
         public FirebaseAuthService() {
         }
     }

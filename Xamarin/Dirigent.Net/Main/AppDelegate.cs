@@ -5,7 +5,7 @@ using UIKit;
 
 namespace Dirigent.Net.Main {
 	[Register("AppDelegate")]
-	public class AppDelegate : UIApplicationDelegate {
+	internal sealed class AppDelegate : UIApplicationDelegate {
 		private static readonly Bootstrapper bootstrapper;
 
 		public override UIWindow Window { get; set; }

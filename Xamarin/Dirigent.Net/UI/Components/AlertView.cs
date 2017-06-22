@@ -8,7 +8,7 @@ using Foundation;
 using UIKit;
 
 namespace Dirigent.Net.UI.Components {
-	public class AlertView : IDisposable {
+	internal class AlertView : IDisposable {
 		private readonly UIAlertView alertView;
 		private readonly TaskCompletionSource<AlertViewResult> tcs;
 			
