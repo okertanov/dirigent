@@ -22,8 +22,6 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <IOSDebuggerPort>58778</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
@@ -39,8 +37,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
@@ -57,8 +53,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
@@ -77,8 +71,6 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
@@ -126,10 +118,12 @@
     <Folder Include="MVVM\Model\" />
     <Folder Include="MVVM\Core\" />
     <Folder Include="MVVM\ViewModel\" />
+    <Folder Include="UI\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="UI\Main.storyboard" />
+    <InterfaceDefinition Include="UI\Auth\AuthMainVC.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -148,12 +142,6 @@
     <Compile Include="Main\AppDelegate.cs" />
     <Compile Include="Main\Main.cs" />
     <Compile Include="Main\Bootstrapper.cs" />
-    <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyIoC.cs">
-      <Link>Sys\TinyIoC\src\TinyIoC\TinyIoC.cs</Link>
-    </Compile>
-    <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyMessenger.cs">
-      <Link>Sys\TinyIoC\src\TinyIoC\TinyMessenger.cs</Link>
-    </Compile>
     <Compile Include="Sys\Core\WeakReferenceEx.cs" />
     <Compile Include="Sys\Helpers\StringExtensions.cs" />
     <Compile Include="Logger\ConsoleLogger.cs" />
@@ -180,10 +168,25 @@
     <Compile Include="Sys\Helpers\ExceptionExtensions.cs" />
     <Compile Include="Services\IPhotoLibraryService.cs" />
     <Compile Include="Services\Impl\PhotoLibraryService.cs" />
+    <Compile Include="UI\Auth\AuthMainVC.cs" />
+    <Compile Include="UI\Auth\AuthMainVC.designer.cs">
+      <DependentUpon>AuthMainVC.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-128x128.png" />
     <BundleResource Include="Resources\map-512x512.png" />
+    <BundleResource Include="GoogleService-Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dirigent.Auth\Dirigent.Auth.csproj">
+      <Project>{8D367C72-23A2-4A52-B65A-479DC37C2D1E}</Project>
+      <Name>Dirigent.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dirigent.Common\Dirigent.Common.csproj">
+      <Project>{E0FF1A01-868B-4D34-8A1F-9DA9456D79D5}</Project>
+      <Name>Dirigent.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />

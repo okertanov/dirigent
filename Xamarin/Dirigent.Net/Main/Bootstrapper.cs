@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Dirigent.Common.Core;
+using Dirigent.Common.Core.Module;
 using Dirigent.Net.Logging;
 using Dirigent.Net.Messaging;
 using Dirigent.Net.Services;
@@ -14,7 +18,7 @@ namespace Dirigent.Net.Main {
 
 		private static readonly Logger Logger = LogManager.GetLogger<Bootstrapper>();
 
-		public Bootstrapper(TinyIoCContainer container) {
+		internal Bootstrapper(TinyIoCContainer container) {
 			this.container = container;
 
 			this.container.Register<ITinyMessengerHub, TinyMessengerHub>().AsSingleton();
@@ -24,23 +28,26 @@ namespace Dirigent.Net.Main {
 			this.container.Register<IPhotoLibraryService, PhotoLibraryService>().AsSingleton();
 		}
 
-		public void Launched() {
+		internal async void Launched() {
 			Logger.Debug("Launched");
-			MapServices.ProvideAPIKey("AIzaSyBFI1eo79_NB3nflo4ac48fUlkGos__WN4");
+
+			await InitModules();
+			await InitExternal();
+
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.Launched));
 		}
 
-		public void Terminate() {
+		internal void Terminate() {
 			Logger.Debug("Terminate");
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.Terminate));
 		}
 
-		public void ResignActivation() {
+		internal void ResignActivation() {
 			Logger.Debug("Resign Activation");
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.ResignActivation));
 		}
 
-		public void Activated() {
+		internal void Activated() {
 			Logger.Debug("Activated");
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.Activated));
 		}
@@ -53,6 +60,23 @@ namespace Dirigent.Net.Main {
 		internal void EnterForeground() {
 			Logger.Debug("Enter Foreground");
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.EnterForeground));
+		}
+
+		private Task InitModules() {
+			var modules = new IModule[] {
+				new Common.CommonModule(),
+				new Auth.AuthModule()
+			};
+			var tasks = modules.Select(m => m.Init());
+
+			return Task.WhenAll(tasks);
+		}
+			
+		private Task InitExternal() {
+			// Google Maps API
+			MapServices.ProvideAPIKey("AIzaSyBFI1eo79_NB3nflo4ac48fUlkGos__WN4");
+
+			return Task.CompletedTask;
 		}
 	}
 }
