@@ -200,6 +200,14 @@
       <Project>{50393067-DD96-487B-96E3-6EDB409765D1}</Project>
       <Name>Dirigent.Auth.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dirigent.Remote\Dirigent.Remote.csproj">
+      <Project>{8AACDB55-F454-4D69-B95E-50612489C037}</Project>
+      <Name>Dirigent.Remote</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dirigent.Remote.iOS.iOS\Dirigent.Remote.iOS.csproj">
+      <Project>{FB0AEFFF-EBDC-49A4-B288-10E89FD3B419}</Project>
+      <Name>Dirigent.Remote.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />

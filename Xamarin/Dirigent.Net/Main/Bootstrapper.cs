@@ -67,7 +67,9 @@ namespace Dirigent.Net.Main {
 			var modules = new IModule[] {
 				new Common.CommonModule(container, messenger),
 				new Auth.AuthModule(container, messenger),
-				new Auth.iOS.AuthIosModule(container, messenger)
+				new Auth.iOS.AuthIosModule(container, messenger),
+				new Remote.RemoteModule(container, messenger),
+				new Remote.iOS.RemoteIosModule(container, messenger)
 			};
 			var tasks = modules.Select(m => m.Init());
 
