@@ -11,7 +11,7 @@ namespace Dirigent.Net.Main {
 		public override UIWindow Window { get; set; }
 
 		static AppDelegate() {
-			bootstrapper = new Bootstrapper(TinyIoCContainer.Current);
+			bootstrapper = new Bootstrapper();
 		}
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions) {

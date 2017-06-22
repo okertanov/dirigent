@@ -1,31 +1,31 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Dirigent.Common.Core;
+using Dirigent.Common.Core.IoC;
 using Dirigent.Common.Core.Module;
 using Dirigent.Net.Logging;
 using Dirigent.Net.Messaging;
 using Dirigent.Net.Services;
 using Dirigent.Net.Services.Impl;
+using Dirigent.Net.Sys.Core;
 using Google.Maps;
 using TinyIoC;
 using TinyMessenger;
 
 namespace Dirigent.Net.Main {
 	public class Bootstrapper {
-		private readonly TinyIoCContainer container;
-		private readonly ITinyMessengerHub messenger;
+		private readonly IIoCContainer container;
+		private readonly IMessengerHub messenger;
 
 		private static readonly Logger Logger = LogManager.GetLogger<Bootstrapper>();
 
-		internal Bootstrapper(TinyIoCContainer container) {
-			this.container = container;
+		internal Bootstrapper() {
+			container = new IoCContainer(TinyIoCContainer.Current);
 
-			this.container.Register<ITinyMessengerHub, TinyMessengerHub>().AsSingleton();
-			this.messenger = this.container.Resolve<ITinyMessengerHub>();
+			container.Register<ITinyMessengerHub, TinyMessengerHub>();
+			messenger = new MessengerHub(container.Resolve<ITinyMessengerHub>());
 
-			this.container.Register<ILocationService, LocationService>().AsSingleton();
-			this.container.Register<IPhotoLibraryService, PhotoLibraryService>().AsSingleton();
+			container.Register<ILocationService, LocationService>();
+			container.Register<IPhotoLibraryService, PhotoLibraryService>();
 		}
 
 		internal async void Launched() {
@@ -34,6 +34,7 @@ namespace Dirigent.Net.Main {
 			await InitModules();
 			await InitExternal();
 
+			var hub = container.Resolve<ITinyMessengerHub>();
 			messenger.PublishAsync(new AppLifecycleMessage(this, AppLifecycleState.Launched));
 		}
 
@@ -67,7 +68,7 @@ namespace Dirigent.Net.Main {
 				new Common.CommonModule(),
 				new Auth.AuthModule()
 			};
-			var tasks = modules.Select(m => m.Init());
+			var tasks = modules.Select(m => m.Init(container, messenger));
 
 			return Task.WhenAll(tasks);
 		}

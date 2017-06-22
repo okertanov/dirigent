@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Dirigent.Common.Core.IoC;
 using Dirigent.Common.Core.Module;
 
 namespace Dirigent.Auth {
@@ -7,7 +7,7 @@ namespace Dirigent.Auth {
 		public AuthModule() {
 		}
 
-		public Task Init() {
+		public Task Init(IIoCContainer container, IMessengerHub messenger) {
 			return Task.FromResult(true);
 		}
 	}

@@ -119,6 +119,7 @@
     <Folder Include="MVVM\Core\" />
     <Folder Include="MVVM\ViewModel\" />
     <Folder Include="UI\Auth\" />
+    <Folder Include="Sys\IoC\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -172,6 +173,14 @@
     <Compile Include="UI\Auth\AuthMainVC.designer.cs">
       <DependentUpon>AuthMainVC.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyIoC.cs">
+      <Link>Sys\TinyIoC\TinyIoC.cs</Link>
+    </Compile>
+    <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyMessenger.cs">
+      <Link>Sys\TinyIoC\TinyMessenger.cs</Link>
+    </Compile>
+    <Compile Include="Sys\IoC\IoCContainer.cs" />
+    <Compile Include="Sys\IoC\MessengerHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-128x128.png" />
