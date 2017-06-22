@@ -65,10 +65,11 @@ namespace Dirigent.Net.Main {
 
 		private Task InitModules() {
 			var modules = new IModule[] {
-				new Common.CommonModule(),
-				new Auth.AuthModule()
+				new Common.CommonModule(container, messenger),
+				new Auth.AuthModule(container, messenger),
+				new Auth.iOS.AuthIosModule(container, messenger)
 			};
-			var tasks = modules.Select(m => m.Init(container, messenger));
+			var tasks = modules.Select(m => m.Init());
 
 			return Task.WhenAll(tasks);
 		}

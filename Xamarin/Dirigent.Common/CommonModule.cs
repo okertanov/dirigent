@@ -4,10 +4,10 @@ using Dirigent.Common.Core.Module;
 
 namespace Dirigent.Common {
 	public class CommonModule : IModule {
-		public CommonModule() {
+		public CommonModule(IIoCContainer container, IMessengerHub messenger) {
 		}
 
-		public Task Init(IIoCContainer container, IMessengerHub messenger) {
+		public Task Init() {
 			return Task.FromResult(true);
 		}
 	}

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Common", "Dirigent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Auth", "Dirigent.Auth\Dirigent.Auth.csproj", "{8D367C72-23A2-4A52-B65A-479DC37C2D1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Auth.iOS", "Dirigent.Auth.iOS.iOS\Dirigent.Auth.iOS.csproj", "{50393067-DD96-487B-96E3-6EDB409765D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -39,5 +41,13 @@ Global
 		{8D367C72-23A2-4A52-B65A-479DC37C2D1E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8D367C72-23A2-4A52-B65A-479DC37C2D1E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{8D367C72-23A2-4A52-B65A-479DC37C2D1E}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Release|iPhone.Build.0 = Release|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{50393067-DD96-487B-96E3-6EDB409765D1}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

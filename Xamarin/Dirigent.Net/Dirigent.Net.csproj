@@ -23,7 +23,7 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebuggerPort>58778</IOSDebuggerPort>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
@@ -195,6 +195,10 @@
     <ProjectReference Include="..\Dirigent.Common\Dirigent.Common.csproj">
       <Project>{E0FF1A01-868B-4D34-8A1F-9DA9456D79D5}</Project>
       <Name>Dirigent.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dirigent.Auth.iOS.iOS\Dirigent.Auth.iOS.csproj">
+      <Project>{50393067-DD96-487B-96E3-6EDB409765D1}</Project>
+      <Name>Dirigent.Auth.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
