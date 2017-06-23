@@ -21,9 +21,6 @@ namespace Dirigent.Auth.iOS {
 			// Firebase API
 			Firebase.Analytics.App.Configure();
 
-			// Twitter API
-			//MonoTouch.Fabric.TwitterKit.Twitter.SharedInstance.StartWithConsumerKey("4wH2Qd8hSs4BZAZixDJomaPub", "F8adS8qsBKg1UZjXmVrqIRTLxaxFC2AoBUP6giVIokLrCkaRGQ");
-
 			return Task.FromResult(true);
 		}
 	}

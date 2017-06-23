@@ -118,15 +118,6 @@
     <Reference Include="Firebase.Database">
       <HintPath>..\packages\Xamarin.Firebase.iOS.Database.3.1.1.2\lib\Xamarin.iOS10\Firebase.Database.dll</HintPath>
     </Reference>
-    <Reference Include="MonoTouch.Fabric">
-      <HintPath>..\packages\MonoTouch.Fabric.1.2.8.1\lib\Xamarin.iOS10\MonoTouch.Fabric.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoTouch.Fabric.TwitterCore">
-      <HintPath>..\packages\MonoTouch.Fabric.TwitterCore.1.9.0.1\lib\Xamarin.iOS10\MonoTouch.Fabric.TwitterCore.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoTouch.Fabric.TwitterKit">
-      <HintPath>..\packages\MonoTouch.Fabric.TwitterKit.1.9.0.2\lib\Xamarin.iOS10\MonoTouch.Fabric.TwitterKit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
