@@ -15,10 +15,14 @@ namespace Dirigent.Auth.iOS {
 		}
 
 		public Task Init() {
-            container.Register<IAuthService, FirebaseAuthService>();
+			container.Register<IAuthService, FirebaseAuthService>();
 			container.Register<IAuthenticator, VisualAuthenticator>();
 
+			// Firebase API
 			Firebase.Analytics.App.Configure();
+
+			// Twitter API
+			//MonoTouch.Fabric.TwitterKit.Twitter.SharedInstance.StartWithConsumerKey("4wH2Qd8hSs4BZAZixDJomaPub", "F8adS8qsBKg1UZjXmVrqIRTLxaxFC2AoBUP6giVIokLrCkaRGQ");
 
 			return Task.FromResult(true);
 		}

@@ -1,4 +1,5 @@
 using CoreGraphics;
+using MonoTouch.Fabric.TwitterKit;
 using UIKit;
 
 namespace Dirigent.Auth.iOS.UI {
@@ -9,23 +10,33 @@ namespace Dirigent.Auth.iOS.UI {
 		public override void ViewDidLoad() {
 			base.ViewDidLoad();
 
-			var continueAsDemoButton1 = new UIButton(UIButtonType.RoundedRect) {
+			/*var twiterButton = new TWTRLogInButton() {
 				Bounds = new CGRect(0, 0, 100, 40),
 				Enabled = true,
 				Hidden = false,
 				BackgroundColor = UIColor.Red
 			};
-			continueAsDemoButton1.WidthAnchor.ConstraintEqualTo(continueAsDemoButton1.Bounds.Width).Active = true;
-			continueAsDemoButton1.HeightAnchor.ConstraintEqualTo(continueAsDemoButton1.Bounds.Height).Active = true;
-			continueAsDemoButton1.SetTitle("Other User", UIControlState.Normal);
-			continueAsDemoButton1.SetTitleColor(UIColor.DarkTextColor, UIControlState.Normal);
+			twiterButton.WidthAnchor.ConstraintEqualTo(twiterButton.Bounds.Width).Active = true;
+			twiterButton.HeightAnchor.ConstraintEqualTo(twiterButton.Bounds.Height).Active = true;*/
+
+			var continueAsDemoButton = new UIButton(UIButtonType.RoundedRect) {
+				Bounds = new CGRect(0, 0, 100, 40),
+				Enabled = true,
+				Hidden = false,
+				BackgroundColor = UIColor.Green
+			};
+			continueAsDemoButton.WidthAnchor.ConstraintEqualTo(continueAsDemoButton.Bounds.Width).Active = true;
+			continueAsDemoButton.HeightAnchor.ConstraintEqualTo(continueAsDemoButton.Bounds.Height).Active = true;
+			continueAsDemoButton.SetTitle("Demo User", UIControlState.Normal);
+			continueAsDemoButton.SetTitleColor(UIColor.DarkTextColor, UIControlState.Normal);
 
 			StackView.Spacing = 8f;
 			StackView.Distribution = UIStackViewDistribution.EqualSpacing;
 			StackView.Alignment = UIStackViewAlignment.Center;
 			StackView.TranslatesAutoresizingMaskIntoConstraints = false;
 
-			StackView.AddArrangedSubview(continueAsDemoButton1);
+			//StackView.AddArrangedSubview(twiterButton);
+			StackView.AddArrangedSubview(continueAsDemoButton);
 
 			StackView.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
 			StackView.CenterYAnchor.ConstraintEqualTo(View.CenterYAnchor).Active = true;
