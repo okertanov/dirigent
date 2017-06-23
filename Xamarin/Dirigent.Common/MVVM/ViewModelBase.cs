@@ -1,7 +1,6 @@
 using System;
-using Dirigent.iOS.MVVM.Core;
 
-namespace Dirigent.iOS.MVVM.ViewModel {
+namespace Dirigent.Common.MVVM {
 	public class ViewModelBase : NotifyObject {
 		public ViewModelBase() {
 		}

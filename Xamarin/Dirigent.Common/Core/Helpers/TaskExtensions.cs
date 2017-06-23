@@ -1,7 +1,6 @@
-using System;
 using System.Threading.Tasks;
 
-namespace Dirigent.iOS.Sys.Helpers {
+namespace Dirigent.Common.Core.Helpers {
 	public static class TaskExtensions {
 		public static Task CompletedTask { get; } = Task.FromResult(true);
 

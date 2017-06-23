@@ -1,7 +1,6 @@
-using System;
 using CoreLocation;
+using Dirigent.Common.Core;
 using Dirigent.iOS.Logging;
-using Dirigent.iOS.Sys.Core;
 using Foundation;
 
 namespace Dirigent.iOS.Services.Impl {

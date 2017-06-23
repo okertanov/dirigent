@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UIKit;
 
-namespace Dirigent.iOS.Sys.Helpers {
+namespace Dirigent.iOS.Core.Helpers {
 	public static class UIUtils {
 		public static void SetStatusBarStyle(StatusbarStyle style) {
 			switch (style) {

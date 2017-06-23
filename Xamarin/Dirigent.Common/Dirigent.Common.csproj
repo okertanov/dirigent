@@ -35,6 +35,13 @@
     <Compile Include="Core\IoC\IIoCContainer.cs" />
     <Compile Include="Core\IoC\IMessengerHub.cs" />
     <Compile Include="Entity\UserInfo.cs" />
+    <Compile Include="Core\WeakReferenceEx.cs" />
+    <Compile Include="MVVM\NotifyObject.cs" />
+    <Compile Include="MVVM\ModelBase.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="Core\Helpers\ExceptionExtensions.cs" />
+    <Compile Include="Core\Helpers\StringExtensions.cs" />
+    <Compile Include="Core\Helpers\TaskExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -42,6 +49,8 @@
     <Folder Include="Core\Module\" />
     <Folder Include="Core\IoC\" />
     <Folder Include="Entity\" />
+    <Folder Include="MVVM\" />
+    <Folder Include="Core\Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

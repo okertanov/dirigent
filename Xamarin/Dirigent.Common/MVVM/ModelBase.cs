@@ -1,7 +1,6 @@
 using System;
-using Dirigent.iOS.MVVM.Core;
 
-namespace Dirigent.iOS.MVVM.Model {
+namespace Dirigent.Common.MVVM {
 	public class ModelBase : NotifyObject {
 		public ModelBase() {
 		}

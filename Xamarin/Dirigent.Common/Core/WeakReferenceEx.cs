@@ -1,6 +1,6 @@
 using System;
 
-namespace Dirigent.iOS.Sys.Core {
+namespace Dirigent.Common.Core {
 	public static class WeakReferenceEx {
 		public static WeakReferenceEx<T> Create<T>(T target) where T: class {
 			return new WeakReferenceEx<T>(target);

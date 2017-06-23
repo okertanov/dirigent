@@ -1,7 +1,7 @@
 using Dirigent.Common.Core.IoC;
 using TinyIoC;
 
-namespace Dirigent.iOS.Sys.Core {
+namespace Dirigent.iOS.Core.IoC {
 	internal class IoCContainer : IIoCContainer {
 		private readonly TinyIoCContainer container;
 

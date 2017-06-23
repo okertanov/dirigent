@@ -1,6 +1,6 @@
 using System;
 
-namespace Dirigent.iOS.Sys.Helpers {
+namespace Dirigent.Common.Core.Helpers {
 	public static class StringExtensions {
 	}
 }

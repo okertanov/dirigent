@@ -131,19 +131,14 @@
     <Folder Include="Resources\" />
     <Folder Include="UI\" />
     <Folder Include="Main\" />
-    <Folder Include="Sys\" />
-    <Folder Include="Sys\Core\" />
-    <Folder Include="Sys\Helpers\" />
+    <Folder Include="Core\" />
+    <Folder Include="Core\Helpers\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Impl\" />
     <Folder Include="Messaging\" />
     <Folder Include="UI\Components\" />
-    <Folder Include="MVVM\" />
-    <Folder Include="MVVM\Model\" />
-    <Folder Include="MVVM\Core\" />
-    <Folder Include="MVVM\ViewModel\" />
     <Folder Include="UI\Auth\" />
-    <Folder Include="Sys\IoC\" />
+    <Folder Include="Core\IoC\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -167,8 +162,6 @@
     <Compile Include="Main\AppDelegate.cs" />
     <Compile Include="Main\Main.cs" />
     <Compile Include="Main\Bootstrapper.cs" />
-    <Compile Include="Sys\Core\WeakReferenceEx.cs" />
-    <Compile Include="Sys\Helpers\StringExtensions.cs" />
     <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\LogManager.cs" />
@@ -179,18 +172,13 @@
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\Impl\LocationService.cs" />
     <Compile Include="UI\Components\ActionSheet.cs" />
-    <Compile Include="Sys\Helpers\ThreadUtils.cs" />
+    <Compile Include="Core\Helpers\ThreadUtils.cs" />
     <Compile Include="Services\IBookmarksManager.cs" />
     <Compile Include="Services\IBookmarksRepository.cs" />
     <Compile Include="UI\Components\HeadUpDisplay.cs" />
     <Compile Include="UI\Components\GalleryImagePicker.cs" />
-    <Compile Include="Sys\Helpers\UIUtils.cs" />
+    <Compile Include="Core\Helpers\UIUtils.cs" />
     <Compile Include="UI\Components\AlertView.cs" />
-    <Compile Include="MVVM\Model\ModelBase.cs" />
-    <Compile Include="MVVM\Core\NotifyObject.cs" />
-    <Compile Include="MVVM\ViewModel\ViewModelBase.cs" />
-    <Compile Include="Sys\Helpers\TaskExtensions.cs" />
-    <Compile Include="Sys\Helpers\ExceptionExtensions.cs" />
     <Compile Include="Services\IPhotoLibraryService.cs" />
     <Compile Include="Services\Impl\PhotoLibraryService.cs" />
     <Compile Include="UI\Auth\AuthMainVC.cs" />
@@ -198,13 +186,13 @@
       <DependentUpon>AuthMainVC.cs</DependentUpon>
     </Compile>
     <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyIoC.cs">
-      <Link>Sys\TinyIoC\TinyIoC.cs</Link>
+      <Link>Core\TinyIoC\TinyIoC.cs</Link>
     </Compile>
     <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyMessenger.cs">
-      <Link>Sys\TinyIoC\TinyMessenger.cs</Link>
+      <Link>Core\TinyIoC\TinyMessenger.cs</Link>
     </Compile>
-    <Compile Include="Sys\IoC\IoCContainer.cs" />
-    <Compile Include="Sys\IoC\MessengerHub.cs" />
+    <Compile Include="Core\IoC\IoCContainer.cs" />
+    <Compile Include="Core\IoC\MessengerHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-128x128.png" />

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Dirigent.iOS.Sys.Helpers {
+namespace Dirigent.Common.Core.Helpers {
 	public static class ExceptionExtensions {
 		public static Exception Unwrap(this Exception e) {
 			var aggregateException = e as AggregateException;

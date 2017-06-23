@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dirigent.iOS.Sys.Core;
+using Dirigent.Common.Core;
 using UIKit;
 
 namespace Dirigent.iOS.UI.Components {

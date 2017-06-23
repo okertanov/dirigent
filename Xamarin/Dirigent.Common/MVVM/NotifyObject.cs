@@ -1,6 +1,6 @@
 using System;
 
-namespace Dirigent.iOS.MVVM.Core {
+namespace Dirigent.Common.MVVM {
 	public class NotifyObject {
 		public NotifyObject() {
 		}
