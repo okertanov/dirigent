@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dirigent.Common.Entity {
+namespace Dirigent.Auth.Entity {
     public sealed class UserInfo {
         public bool IsAuthenticated { get; }
         public bool IsDemo { get; }

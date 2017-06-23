@@ -31,9 +31,14 @@
     <Compile Include="AuthModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\IAuthenticator.cs" />
+    <Compile Include="Entity\AuthInfo.cs" />
+    <Compile Include="Entity\UserInfo.cs" />
+    <Compile Include="Services\IAuthService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Entity\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dirigent.Common\Dirigent.Common.csproj">

@@ -137,12 +137,10 @@
     <Folder Include="Services\Impl\" />
     <Folder Include="Messaging\" />
     <Folder Include="UI\Components\" />
-    <Folder Include="UI\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="UI\Main.storyboard" />
-    <InterfaceDefinition Include="UI\Auth\AuthMainVC.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -178,10 +176,6 @@
     <Compile Include="UI\Components\AlertView.cs" />
     <Compile Include="Services\IPhotoLibraryService.cs" />
     <Compile Include="Services\Impl\PhotoLibraryService.cs" />
-    <Compile Include="UI\Auth\AuthMainVC.cs" />
-    <Compile Include="UI\Auth\AuthMainVC.designer.cs">
-      <DependentUpon>AuthMainVC.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-512x512.png" />

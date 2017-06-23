@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Dirigent.Auth.iOS.Services.Impl;
+using Dirigent.Auth.Services;
 using Dirigent.Common.Core.IoC;
 using Dirigent.Common.Core.Module;
-using Dirigent.Common.Services;
 
 namespace Dirigent.Auth.iOS {
 	public sealed class AuthIosModule : IModule {
@@ -16,6 +16,7 @@ namespace Dirigent.Auth.iOS {
 
 		public Task Init() {
             container.Register<IAuthService, FirebaseAuthService>();
+			container.Register<IAuthenticator, VisualAuthenticator>();
 
 			Firebase.Analytics.App.Configure();
 

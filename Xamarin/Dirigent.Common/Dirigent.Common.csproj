@@ -30,11 +30,9 @@
   <ItemGroup>
     <Compile Include="CommonModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Core\Module\IModule.cs" />
     <Compile Include="Core\IoC\IIoCContainer.cs" />
     <Compile Include="Core\IoC\IMessengerHub.cs" />
-    <Compile Include="Entity\UserInfo.cs" />
     <Compile Include="Core\WeakReferenceEx.cs" />
     <Compile Include="MVVM\NotifyObject.cs" />
     <Compile Include="MVVM\ModelBase.cs" />
@@ -42,6 +40,7 @@
     <Compile Include="Core\Helpers\ExceptionExtensions.cs" />
     <Compile Include="Core\Helpers\StringExtensions.cs" />
     <Compile Include="Core\Helpers\TaskExtensions.cs" />
+    <Compile Include="Services\IVoidService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

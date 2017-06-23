@@ -43,8 +43,36 @@ namespace Dirigent.Common.iOS.Core.Helpers {
 								tcs.TrySetException(ex);
 							}
 						}, TaskContinuationOptions.ExecuteSynchronously);
+					}
+					catch (Exception e) {
+						tcs.TrySetException(e);
+					}
+				});
 
-						tcs.TrySetResult(true);
+				return tcs.Task;
+			}
+		}
+
+		public static Task<T> SafeBeginInvokeOnMainThreadAsync<T>(Func<Task<T>> action) {
+			if (NSThread.IsMain) {
+				return action.Invoke();
+			}
+			else {
+				var tcs = new TaskCompletionSource<T>();
+				NSThread.MainThread.BeginInvokeOnMainThread(() => {
+					try {
+						action().ContinueWith(t => {
+							try {
+								t.CheckException();
+								tcs.TrySetResult(t.Result);
+							}
+							catch (ObjectDisposedException) {
+								tcs.TrySetResult(t.Result);
+							}
+							catch (Exception ex) {
+								tcs.TrySetException(ex);
+							}
+						}, TaskContinuationOptions.ExecuteSynchronously);
 					}
 					catch (Exception e) {
 						tcs.TrySetException(e);

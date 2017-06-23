@@ -1,5 +1,4 @@
-﻿using System;
-using Dirigent.Common.Entity;
+﻿using Dirigent.Auth.Entity;
 using Dirigent.Common.Services;
 
 namespace Dirigent.Auth.Services {

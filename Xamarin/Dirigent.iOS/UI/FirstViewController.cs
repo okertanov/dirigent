@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CoreGraphics;
 using CoreLocation;
+using Dirigent.Auth.Services;
 using Dirigent.Common.iOS.Core.Helpers;
-using Dirigent.Common.Services;
 using Dirigent.iOS.Logging;
 using Dirigent.iOS.Messaging;
 using Dirigent.iOS.Services;
@@ -20,7 +20,8 @@ namespace Dirigent.iOS.UI {
 	internal partial class FirstViewController : UIViewController {
 		private const float DefaultZoom = 16f;
 
-        private readonly IAuthService authService;
+		private readonly IAuthService authService;
+        private readonly IAuthenticator authenticator;
 		private readonly ILocationService locationService;
 		private readonly IPhotoLibraryService photoLibraryService;
 
@@ -38,6 +39,7 @@ namespace Dirigent.iOS.UI {
 
 		protected FirstViewController(IntPtr handle) : base(handle) {
             authService = TinyIoCContainer.Current.Resolve<IAuthService>();
+			authenticator = TinyIoCContainer.Current.Resolve<IAuthenticator>();
 			locationService = TinyIoCContainer.Current.Resolve<ILocationService>();
 			photoLibraryService = TinyIoCContainer.Current.Resolve<IPhotoLibraryService>();
 
@@ -119,7 +121,13 @@ namespace Dirigent.iOS.UI {
 
         private async Task OnAuthenticateUser(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);
+			await ThreadUtils.SafeBeginInvokeOnMainThreadAsync(OnAuthenticateUserImpl);
         }
+
+		private async Task OnAuthenticateUserImpl() {
+			var info = await authenticator.Authenticate();
+			Logger.Debug("Authenticate status: {0}", info);
+		}
 
 		private async Task OnZoomMyLocation(ActionSheetItem arg) {
 			Logger.Debug("Menu item selected: '{0}'", arg.Title);

@@ -1,7 +1,7 @@
 ﻿using System;
-using Dirigent.Common.Entity;
+using Dirigent.Auth.Entity;
 
-namespace Dirigent.Common.Services {
+namespace Dirigent.Auth.Services {
     public interface IAuthService {
         UserInfo GetUser();
     }
