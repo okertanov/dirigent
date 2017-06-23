@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Dirigent.Common.Core.Helpers;
 using Foundation;
 
-namespace Dirigent.iOS.Core.Helpers {
+namespace Dirigent.Common.iOS.Core.Helpers {
 	public static class ThreadUtils {
 		public static void SafeInvokeOnMainThread(Action action) {
 			if (NSThread.IsMain) {

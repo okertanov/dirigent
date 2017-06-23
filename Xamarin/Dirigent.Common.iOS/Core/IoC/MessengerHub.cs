@@ -1,8 +1,8 @@
 using Dirigent.Common.Core.IoC;
 using TinyMessenger;
 
-namespace Dirigent.iOS.Core.IoC {
-	internal class MessengerHub : IMessengerHub {
+namespace Dirigent.Common.iOS.Core.IoC {
+	public class MessengerHub : IMessengerHub {
 		private readonly ITinyMessengerHub messengerHub;
 
 		public MessengerHub(ITinyMessengerHub messengerHub) {

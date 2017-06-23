@@ -131,14 +131,11 @@
     <Folder Include="Resources\" />
     <Folder Include="UI\" />
     <Folder Include="Main\" />
-    <Folder Include="Core\" />
-    <Folder Include="Core\Helpers\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Impl\" />
     <Folder Include="Messaging\" />
     <Folder Include="UI\Components\" />
     <Folder Include="UI\Auth\" />
-    <Folder Include="Core\IoC\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -172,12 +169,10 @@
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\Impl\LocationService.cs" />
     <Compile Include="UI\Components\ActionSheet.cs" />
-    <Compile Include="Core\Helpers\ThreadUtils.cs" />
     <Compile Include="Services\IBookmarksManager.cs" />
     <Compile Include="Services\IBookmarksRepository.cs" />
     <Compile Include="UI\Components\HeadUpDisplay.cs" />
     <Compile Include="UI\Components\GalleryImagePicker.cs" />
-    <Compile Include="Core\Helpers\UIUtils.cs" />
     <Compile Include="UI\Components\AlertView.cs" />
     <Compile Include="Services\IPhotoLibraryService.cs" />
     <Compile Include="Services\Impl\PhotoLibraryService.cs" />
@@ -185,14 +180,6 @@
     <Compile Include="UI\Auth\AuthMainVC.designer.cs">
       <DependentUpon>AuthMainVC.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyIoC.cs">
-      <Link>Core\TinyIoC\TinyIoC.cs</Link>
-    </Compile>
-    <Compile Include="..\submodules\TinyIoC\src\TinyIoC\TinyMessenger.cs">
-      <Link>Core\TinyIoC\TinyMessenger.cs</Link>
-    </Compile>
-    <Compile Include="Core\IoC\IoCContainer.cs" />
-    <Compile Include="Core\IoC\MessengerHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\map-128x128.png" />
@@ -219,6 +206,10 @@
     <ProjectReference Include="..\Dirigent.Remote.iOS\Dirigent.Remote.iOS.csproj">
       <Project>{FB0AEFFF-EBDC-49A4-B288-10E89FD3B419}</Project>
       <Name>Dirigent.Remote.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dirigent.Common.iOS\Dirigent.Common.iOS.csproj">
+      <Project>{8664B689-D27D-4D36-83C4-B17F089B7D51}</Project>
+      <Name>Dirigent.Common.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

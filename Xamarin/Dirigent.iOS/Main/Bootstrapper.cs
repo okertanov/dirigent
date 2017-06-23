@@ -2,7 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dirigent.Common.Core.IoC;
 using Dirigent.Common.Core.Module;
-using Dirigent.iOS.Core.IoC;
+using Dirigent.Common.iOS.Core.IoC;
 using Dirigent.iOS.Logging;
 using Dirigent.iOS.Messaging;
 using Dirigent.iOS.Services;
@@ -66,6 +66,7 @@ namespace Dirigent.iOS.Main {
 		private Task InitModules() {
 			var modules = new IModule[] {
 				new Common.CommonModule(container, messenger),
+				new Common.iOS.CommonIosModule(container, messenger),
 				new Auth.AuthModule(container, messenger),
 				new Auth.iOS.AuthIosModule(container, messenger),
 				new Remote.RemoteModule(container, messenger),
