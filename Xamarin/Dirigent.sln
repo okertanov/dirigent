@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Net", "Dirigent.Net\Dirigent.Net.csproj", "{081CCA81-5375-4960-8F1F-134EC3788067}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.iOS", "Dirigent.iOS\Dirigent.iOS.csproj", "{081CCA81-5375-4960-8F1F-134EC3788067}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dirigent.Common", "Dirigent.Common\Dirigent.Common.csproj", "{E0FF1A01-868B-4D34-8A1F-9DA9456D79D5}"
 EndProject
