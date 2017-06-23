@@ -126,6 +126,8 @@
     <ImageAsset Include="Assets.xcassets\Second.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Second.imageset\vector.pdf" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\map-120x120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\map-180x180.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -182,9 +184,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\map-128x128.png" />
     <BundleResource Include="Resources\map-512x512.png" />
     <BundleResource Include="GoogleService-Info.plist" />
+    <BundleResource Include="Resources\map-120x120.png" />
+    <BundleResource Include="Resources\map-180x180.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dirigent.Auth\Dirigent.Auth.csproj">
