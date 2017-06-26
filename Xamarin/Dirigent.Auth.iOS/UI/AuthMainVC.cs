@@ -39,7 +39,7 @@ namespace Dirigent.Auth.iOS.UI {
 			};
 			continueAsDemoButton.WidthAnchor.ConstraintEqualTo(continueAsDemoButton.Bounds.Width).Active = true;
 			continueAsDemoButton.HeightAnchor.ConstraintEqualTo(continueAsDemoButton.Bounds.Height).Active = true;
-			continueAsDemoButton.SetTitle("Be Demo User", UIControlState.Normal);
+			continueAsDemoButton.SetTitle("Continue as Demo User", UIControlState.Normal);
 			continueAsDemoButton.SetTitleColor(UIColor.DarkTextColor, UIControlState.Normal);
 
 			StackView.Spacing = 8f;
