@@ -30,3 +30,36 @@ Ideas
  - iCloud or Google KV Storage
  - Consider using Akavache persist layer
 
+Brainstorm Ideas
+----------------
+ - Tier0: route to location.
+    1. Via external gmaps app
+    2. Via in-app route trace
+ - Tier1: Intelligent bookmarking by in-app photo and metadata guess/edit:
+    food, recreation, fishing... Then grouping and querying.
+ - Bookmark by in-app taking photo:
+    * If no geotagging available (no inet) — prompt location by map.
+ - Marker 'star':
+    * If photos are overlapped in close zoom/location
+ - Picker radius for location:
+    * Draw circle on map to filter inside an area
+ - Geotag:
+    * By searching readable name and save back to gallery:
+    * Tag: 'Jurmala' for these photos reflects its metadata in the gallery.
+    * To find a way how to create new Images system collections out of my app.
+    Like: Dirigent added, exported, in cloud sync, public etc.
+ - Akavache & sync token
+ - Switch map engine (and to know how much it cost):
+    * Google
+    * Apple
+    * OSM
+ - Upload photos to/like google maps social;
+ - Also share image + place to twitter, fb;
+ - Social components
+    * Call uber to this place
+    * Call police
+    * You are walking near "paid place" notify or click/advertise
+    * Call sharpei/dirigent/citizen for this place to walk with
+    * Suggest other place near you ('flower', 'md briosh')
+    * Cloud your bookmarks/photos
+    * !!!The New Name For: U + Your Place + Destination + Photo
